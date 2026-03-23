@@ -2,6 +2,7 @@ import React from "react"
 import MaxWidthWrapper from "./components/max-width-wrapper"
 import Heading from "./components/heading"
 import { Check } from "lucide-react"
+import ShinyButton from "./components/shiny-button"
 
 const Page = () => {
   return (
@@ -38,6 +39,14 @@ const Page = () => {
                 </li>
               ))}
             </ul>
+            <div className="w-full max-w-80 ">
+              <ShinyButton
+                href="/sign-up"
+                className="realtive z-10 h-14 w-full text-base shadow-lg transition-shadow duration-300 hover:shadow-xl"
+              >
+                Start for free today
+              </ShinyButton>
+            </div>
           </div>
         </MaxWidthWrapper>
       </section>
