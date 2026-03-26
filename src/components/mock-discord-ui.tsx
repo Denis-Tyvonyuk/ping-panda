@@ -1,5 +1,7 @@
 import React, { PropsWithChildren } from "react"
 import { Icons } from "./icons"
+import { Inbox, PlusCircle, UserCircle } from "lucide-react"
+import Image from "next/image"
 
 const MockDiscordUI = ({ children }: PropsWithChildren) => {
   return (
@@ -24,10 +26,71 @@ const MockDiscordUI = ({ children }: PropsWithChildren) => {
                 "
           >
             <span className="text-xl font-semibold text-gray-400">
-              {String.fromCharCode(65 + 1)}
+              {String.fromCharCode(65 + i)}
             </span>
           </div>
         ))}
+        <div
+          className="group mt-auto size-12 bg-discord-background rounded-3xl flex items-center justify-center
+                mb-3 hover:rounded-xl transition-all duration-200 cursor-not-allowed
+                hover:bg-[#3ba55c]
+                "
+        >
+          <PlusCircle className="text-[#3ba55c] group-hover:text-white" />
+        </div>
+      </div>
+
+      <div className="hidden md:flex w-60 bg-[#2f3136] flex-col">
+        <div className="px-4 h-16 border-[#202225] flex items-center shadow-sm">
+          <div
+            className="w-full bg-[#202225] text-sm rounded px-2 h-8 flex items-center justify-center
+          text-gray-500 cursor-not-allowed
+          "
+          >
+            Find or start a conversation
+          </div>
+        </div>
+        <div className="flex-1 overflow-auto pt-4">
+          <div className="px-2 mb-4">
+            <div className="flex items-center text-sm px-2 py-1.5 rounded hover:bg-[#393c43] text-[#dcddde] cursor-not-allowed">
+              <UserCircle className="mr-4 size-8 text-[#b9bbbe]" />
+              <span className="font-medium text-sm">Friends</span>
+            </div>
+            <div className="flex items-center text-sm px-2 py-1.5 rounded hover:bg-[#393c43] text-[#dcddde] cursor-not-allowed">
+              <Inbox className="mr-4 size-8 text-[#b9bbbe]" />
+              <span className="font-medium text-sm">Nitro</span>
+            </div>
+          </div>
+          <div className="px-2 mb-4">
+            <h3 className="text-xs font-semibold text-[#8e9297] px-2 mb-2 uppercase">
+              Direct Messages
+            </h3>
+            <div className="flex items-center px-2 py-1.5 rounded bg-[#393c43] text-white cursor-pointer">
+              <Image
+                src={"brand-asset-profile-picture.png"}
+                alt="PingPanda Avatar"
+                width={32}
+                height={32}
+                className="object-cover rounded-full mr-3"
+              />
+              <span className="font-medium">PingPanda</span>
+            </div>
+            <div className="my-1 space-y-px">
+              {[...Array(4)].map((_, i) => (
+                <div
+                  key={i}
+                  className="flex items-center px-2 py-1.5 rounded text-gray-600
+                  cursor-not-allowed
+                  "
+                >
+                  <div className="size-8 rounded-full bg-discord-background mr-3">
+                    <span className="font-medium">User {i + 1}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
