@@ -1,14 +1,14 @@
 "use client"
 
 import React, {
+  ReactNode,
   useEffect,
   useMemo,
   useState,
   type ComponentPropsWithoutRef,
 } from "react"
 import { AnimatePresence, motion, type MotionProps } from "motion/react"
-
-import { cn } from "@/lib/utils"
+import { cn } from "@/utils"
 
 export function AnimatedListItem({ children }: { children: React.ReactNode }) {
   const animations: MotionProps = {
@@ -32,40 +32,30 @@ export interface AnimatedListProps extends ComponentPropsWithoutRef<"div"> {
 
 export const AnimatedList = React.memo(
   ({ children, className, delay = 1000, ...props }: AnimatedListProps) => {
-    const [index, setIndex] = useState(0)
-    const childrenArray = useMemo(
-      () => React.Children.toArray(children),
-      [children]
-    )
+    const [messages, setMessages] = useState<ReactNode[]>([])
+    const childrenArray = React.Children.toArray(children)
 
     useEffect(() => {
-      let timeout: ReturnType<typeof setTimeout> | null = null
-
-      if (index < childrenArray.length - 1) {
-        timeout = setTimeout(() => {
-          setIndex((prevIndex) => (prevIndex + 1) % childrenArray.length)
-        }, delay)
-      }
+      const interval = setInterval(() => {
+        if (messages.length < childrenArray.length) {
+          setMessages((prev) => [childrenArray[messages.length], ...prev])
+        } else {
+          clearInterval(interval)
+        }
+      }, delay)
 
       return () => {
-        if (timeout !== null) {
-          clearTimeout(timeout)
-        }
+        clearInterval(interval)
       }
-    }, [index, delay, childrenArray.length])
-
-    const itemsToShow = useMemo(() => {
-      const result = childrenArray.slice(0, index + 1).reverse()
-      return result
-    }, [index, childrenArray])
+    }, [messages.length, delay, childrenArray])
 
     return (
       <div
-        className={cn(`flex flex-col items-center gap-4`, className)}
+        className={cn(`flex flex-col-reverse items-center gap-4`, className)}
         {...props}
       >
         <AnimatePresence>
-          {itemsToShow.map((item) => (
+          {messages.map((item) => (
             <AnimatedListItem key={(item as React.ReactElement).key}>
               {item}
             </AnimatedListItem>

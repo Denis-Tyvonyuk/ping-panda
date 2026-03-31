@@ -5,6 +5,7 @@ import { Check } from "lucide-react"
 import ShinyButton from "@/components/shiny-button"
 import MockDiscordUI from "@/components/mock-discord-ui"
 import { AnimatedList, AnimatedListItem } from "@/components/ui/animated-list"
+import DiscordMessage from "@/components/discord-message"
 
 const Page = () => {
   return (
@@ -60,7 +61,46 @@ const Page = () => {
               <MockDiscordUI>
                 <AnimatedList>
                   <AnimatedListItem>
-                    <DiscordMessage />
+                    <DiscordMessage
+                      avatarAlt="PingPanda Avatar"
+                      avatarSrc="/brand-assets-profile-picture.png"
+                      username="PingPanda"
+                      timestamp="Today at 12:35PM"
+                      badgeText="SignUp"
+                      badgeColor="#43b581"
+                      title="U New user signed up"
+                      content={{
+                        name: "Mateo ortiz",
+                        email: "m.ad@mail.com",
+                      }}
+                    />
+                    <DiscordMessage
+                      avatarAlt="PingPanda Avatar"
+                      avatarSrc="/brand-assets-profile-picture.png"
+                      username="PingPanda"
+                      timestamp="Today at 11:35PM"
+                      badgeText="Revenue"
+                      badgeColor="#faa61a"
+                      title="U Payment received"
+                      content={{
+                        amount: "49.00",
+                        email: "sfweef@mail.com",
+                        plan: "PRO",
+                      }}
+                    />
+                    <DiscordMessage
+                      avatarAlt="PingPanda Avatar"
+                      avatarSrc="/brand-assets-profile-picture.png"
+                      username="PingPanda"
+                      timestamp="Today at 9:35PM"
+                      badgeText="Revenue"
+                      badgeColor="#5865f2"
+                      title="R Revenue milestone achived"
+                      content={{
+                        recurringRevenue: "4009.00 USD",
+                        growth: "+8.2%",
+                      }}
+                    />
                   </AnimatedListItem>
                 </AnimatedList>
               </MockDiscordUI>
